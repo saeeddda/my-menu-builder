@@ -22,8 +22,23 @@
   "author": "Saeed Noori",
   "license": "MIT",
   "dependencies": {
-    "sortablejs": "^1.15.0"
+    "@fortawesome/fontawesome-free": "^6.7.2",
+    "gulp": "^5.0.1",
+    "gulp-autoprefixer": "^10.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-connect": "^5.7.0",
+    "gulp-copy": "^5.0.0",
+    "gulp-file-include": "^2.3.0",
+    "gulp-livereload": "^4.0.2",
+    "gulp-rename": "^2.1.0",
+    "gulp-sass": "^6.0.1",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
+    "sortablejs": "^1.15.0",
+    "vazirmatn": "^33.0.3"
   },
   "devDependencies": {
-    "sass": "^1.69.0"  }
+    "sass": "^1.95.0"
+  }
 }

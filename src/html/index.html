@@ -9,7 +9,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <!-- Compiled CSS from SCSS -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
     <!-- Main Container -->
@@ -132,7 +132,7 @@
     <!-- JavaScript -->
     <!-- Option 1: Using ES Modules -->
     <script type="module">
-        import { initMenuBuilder } from './menu-builder.js';
+        import { initMenuBuilder } from 'assets/js/menu-builder.js';
         
         // Initialize when DOM is ready
         document.addEventListener('DOMContentLoaded', () => {
@@ -144,53 +144,3 @@
     <!-- <script src="dist/bundle.js"></script> -->
 </body>
 </html>
-
-<!--
-============================================
-HTML Structure Notes:
-============================================
-
-1. RTL Support:
-   - <html dir="rtl"> for right-to-left layout
-   - All text and UI flows from right to left
-
-2. Main Sections:
-   - .header: Title and description
-   - .content: 2-column grid layout
-   - Left panel: Form + JSON export
-   - Right panel: Menu structure display
-
-3. Form Elements:
-   - Parent dropdown (auto-populated from menu data)
-   - Title, URL, Icon inputs
-   - Submit button
-
-4. Menu List (#menuList):
-   - Root container for Sortable.js
-   - Dynamically populated with menu items
-   - Each item has nested-sortable container
-
-5. Menu Item Structure (created in JS):
-   <li class="menu-item" data-id="1" data-level="0">
-     <div class="menu-item-header">
-       <span class="drag-handle">🔘</span>
-       <div class="menu-item-info">
-         <div class="menu-item-title">Title</div>
-         <div class="menu-item-url">URL</div>
-       </div>
-       <button class="btn-delete">🗑️</button>
-     </div>
-     <ul class="nested-sortable">
-       <!-- Nested items here -->
-     </ul>
-   </li>
-
-6. Data Attributes:
-   - data-id: Unique identifier for each item
-   - data-level: Depth level (0, 1, 2, 3...)
-
-7. Integration:
-   - Import menu-builder.js as ES module
-   - Or bundle with webpack/vite/rollup
-   - Make sure Sortable.js is installed via npm
--->
