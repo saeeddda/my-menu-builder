@@ -27,7 +27,7 @@ export function html() {
 
 export function cssApp() {
     return gulp.src([
-        'src/scss/styles.scss'
+        'src/assets/scss/styles.scss'
     ])
         .pipe(sourcemaps.init())
         .pipe(sass({ includePaths: ['node_modules'] }).on('error', sass.logError))
@@ -55,7 +55,7 @@ export function fontAwesome() {
     ]).pipe(copy('dist/assets/webfonts', { prefix: 4 }));
 };
 
-export function vazirmantFont() {
+export function vazirmatnFont() {
     return gulp.src([
         'node_modules/vazirmatn/**',
     ]).pipe(
@@ -76,11 +76,10 @@ export function watch() {
     gulp.watch('src/html/*.html', gulp.series(html));
     gulp.watch('src/html/*/*.html', gulp.series(html));
     //Watch style files changes
-    gulp.watch('src/scss/*.scss', gulp.series(cssApp));
-    gulp.watch('src/scss/*/*.scss', gulp.series(cssApp));
+    gulp.watch('src/assets/scss/*.scss', gulp.series(cssApp));
+    gulp.watch('src/assets/scss/*/*.scss', gulp.series(cssApp));
     //Watch script files changes
-    gulp.watch('src/js/*.js', gulp.series(jsApp));
-    gulp.watch('src/js/*/*.js', gulp.series(jsDemo));
+    gulp.watch('src/assets/js/*.js', gulp.series(jsApp));
 };
 
 export function webserver() {
@@ -94,13 +93,13 @@ export function webserver() {
 };
 
 export function build() {
-    return gulp.series(
+    gulp.series(
         html,
         cssApp,
         plugins,
         jsApp,
         fontAwesome,
-        vazirmantFont,
+        vazirmatnFont,
     );
 }
 
@@ -110,6 +109,6 @@ export default gulp.series(
     plugins,
     jsApp,
     fontAwesome,
-    vazirmantFont,
+    vazirmatnFont,
     gulp.parallel(watch, webserver)
 );
