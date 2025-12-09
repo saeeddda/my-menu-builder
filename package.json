@@ -5,7 +5,8 @@
   "main": "menu-builder.js",
   "type": "module",
   "scripts": {
-    "css:watch": "sass --watch ./src:./assets",
+    "css": "sass ./src:./assets",
+    "css:watch": "sass ./src:./assets --watch",
     "css:build": "sass ./src:./assets --style compressed"
   },
   "keywords": [
