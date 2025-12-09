@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>سازنده منوی سایت - Menu Builder</title>
-    
+
     <!-- Font Awesome Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
+    <link rel="stylesheet" href="assets/fonts/fontawesome/all.min.css">
+    <link rel="stylesheet" href="assets/fonts/vazirmatn/Vazirmatn-font-face.css">
+
     <!-- Compiled CSS from SCSS -->
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/styles.min.css">
 </head>
+
 <body>
     <!-- Main Container -->
     <div class="container">
-        
+
         <!-- Header Section -->
         <div class="header">
             <h1>
-                <i class="fas fa-bars"></i> 
+                <i class="fas fa-bars"></i>
                 سازنده منوی سایت
             </h1>
             <p>منوی چند سطحی خود را با کشیدن و رها کردن ایجاد کنید</p>
@@ -26,11 +29,11 @@
 
         <!-- Main Content Grid -->
         <div class="content">
-            
+
             <!-- Left Panel: Form & Export -->
             <div class="panel">
                 <h2>
-                    <i class="fas fa-plus-circle"></i> 
+                    <i class="fas fa-plus-circle"></i>
                     افزودن آیتم منو
                 </h2>
 
@@ -56,38 +59,24 @@
                     <!-- Title Input -->
                     <div class="form-group">
                         <label for="menuTitle">عنوان منو</label>
-                        <input 
-                            type="text" 
-                            id="menuTitle" 
-                            placeholder="مثال: صفحه اصلی" 
-                            required
-                        >
+                        <input type="text" id="menuTitle" placeholder="مثال: صفحه اصلی" required>
                     </div>
 
                     <!-- URL Input -->
                     <div class="form-group">
                         <label for="menuUrl">آدرس (URL)</label>
-                        <input 
-                            type="text" 
-                            id="menuUrl" 
-                            placeholder="مثال: /home" 
-                            required
-                        >
+                        <input type="text" id="menuUrl" placeholder="مثال: /home" required>
                     </div>
 
                     <!-- Icon Input (Optional) -->
                     <div class="form-group">
                         <label for="menuIcon">آیکون (اختیاری)</label>
-                        <input 
-                            type="text" 
-                            id="menuIcon" 
-                            placeholder="مثال: fas fa-home"
-                        >
+                        <input type="text" id="menuIcon" placeholder="مثال: fas fa-home">
                     </div>
 
                     <!-- Submit Button -->
                     <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-plus"></i> 
+                        <i class="fas fa-plus"></i>
                         افزودن به منو
                     </button>
                 </form>
@@ -95,11 +84,11 @@
                 <!-- Export Section -->
                 <div class="export-section">
                     <h2>
-                        <i class="fas fa-code"></i> 
+                        <i class="fas fa-code"></i>
                         خروجی JSON
                     </h2>
                     <button class="btn btn-success" onclick="window.menuBuilder.exportMenu()">
-                        <i class="fas fa-download"></i> 
+                        <i class="fas fa-download"></i>
                         دریافت JSON
                     </button>
                     <!-- JSON Output Display -->
@@ -112,10 +101,10 @@
             <!-- Right Panel: Menu Structure -->
             <div class="panel">
                 <h2>
-                    <i class="fas fa-list"></i> 
+                    <i class="fas fa-list"></i>
                     ساختار منو
                 </h2>
-                
+
                 <!-- Menu List Container (Sortable Root) -->
                 <ul id="menuList" class="menu-list">
                     <!-- Empty State (shown when no items) -->
@@ -130,17 +119,14 @@
     </div>
 
     <!-- JavaScript -->
-    <!-- Option 1: Using ES Modules -->
-    <script type="module">
-        import { initMenuBuilder } from 'assets/js/menu-builder.js';
-        
-        // Initialize when DOM is ready
+    <script src="assets/js/vendor.min.js"></script>
+    <script src="assets/js/menu-builder.min.js"></script>
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
-            initMenuBuilder();
+            window.menuBuilder.initMenuBuilder();
         });
     </script>
 
-    <!-- Option 2: Using bundled script (if using webpack/vite) -->
-    <!-- <script src="dist/bundle.js"></script> -->
 </body>
+
 </html>

@@ -5,6 +5,8 @@
 // Features: RTL support, nested drag-drop, level colors, animations
 // ============================================
 
+@use "sass:color";
+
 // Variables
 // ============================================
 $primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -28,6 +30,8 @@ $border-radius: 8px;
 $border-radius-lg: 15px;
 $transition: all 0.3s;
 
+$base-font-family: Vazirmatn, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
 // Reset & Base Styles
 // ============================================
 * {
@@ -37,7 +41,7 @@ $transition: all 0.3s;
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: $base-font-family;
   background: $primary-gradient;
   min-height: 100vh;
   padding: 20px;
@@ -155,6 +159,7 @@ body {
   border: none;
   border-radius: $border-radius;
   cursor: pointer;
+  font-family: $base-font-family;
   font-size: 14px;
   font-weight: 600;
   transition: $transition;
@@ -182,7 +187,8 @@ body {
   color: white;
 
   &:hover {
-    background: darken($success-color, 10%);
+    // background: darken($success-color, 10%);
+    background: color.adjust($success-color, $lightness: 10%);
   }
 }
 
@@ -208,14 +214,15 @@ body {
   color: white;
 
   &:hover {
-    background: darken($danger-color, 10%);
+    // background: darken($danger-color, 10%);
+    background: color.adjust($danger-color, $lightness: 10%);
     transform: scale(1.1);
   }
 }
 
 // Instructions Box
 // ============================================
-.instructions {
+.instructions { 
   background: #e3f2fd;
   padding: 15px;
   border-radius: $border-radius;

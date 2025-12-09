@@ -49,24 +49,44 @@ export function jsApp() {
         .pipe(livereload())
 };
 
-export function fontAwesome() {
-    return gulp.src([
-        'node_modules/@fortawesome/fontawesome-free/webfonts/**'
-    ]).pipe(copy('dist/assets/webfonts', { prefix: 4 }));
+export function jsVendor() {
+  return gulp.src([
+			'node_modules/sortablejs/Sortable.min.js',
+		])
+		.pipe(sourcemaps.init())
+		.pipe(concat('vendor.min.js'))
+		.pipe(sourcemaps.write())
+		.pipe(gulp.dest('dist/assets/js'))
+		.pipe(livereload())
 };
 
-export function vazirmatnFont() {
+export function copyFontawesomeWebfonts() {
     return gulp.src([
-        'node_modules/vazirmatn/**',
+        'node_modules/@fortawesome/fontawesome-free/webfonts/**',
+    ]).pipe(copy('dist/assets/fonts/webfonts', { prefix: 4 }));
+};
+
+export function copyFontawesomeCssJs() {
+    return gulp.src([
+        'node_modules/@fortawesome/fontawesome-free/css/all.min.css',
+        'node_modules/@fortawesome/fontawesome-free/js/all.min.js',
+    ]).pipe(copy('dist/assets/fonts/fontawesome', { prefix: 4 }));
+};
+
+export function copyVazirmatnWebfonts() {
+    return gulp.src([
+        'node_modules/vazirmatn/fonts/webfonts/**',
     ]).pipe(
-        copy('dist/assets/fonts/vazirmatn', { prefix: 4 })
+        copy('dist/assets/fonts/vazirmatn/fonts/webfonts', { prefix: 4 })
     );
 };
 
-export function plugins() {
+export function copyVazirmatnCss() {
     return gulp.src([
-        'node_modules/sortablejs/**',
-    ], { base: './node_modules/' }).pipe(copy('dist/assets/plugins', { prefix: 1 }));
+        'node_modules/vazirmatn/Vazirmatn-font-face.css',
+    ]).pipe(
+        copy('dist/assets/fonts/vazirmatn', { prefix: 4 })
+    );
 };
 
 export function watch() {
@@ -92,23 +112,14 @@ export function webserver() {
     });
 };
 
-export function build() {
-    gulp.series(
-        html,
-        cssApp,
-        plugins,
-        jsApp,
-        fontAwesome,
-        vazirmatnFont,
-    );
-}
-
 export default gulp.series(
     html,
     cssApp,
-    plugins,
+    jsVendor,
     jsApp,
-    fontAwesome,
-    vazirmatnFont,
+    copyFontawesomeWebfonts,
+    copyFontawesomeCssJs,
+    copyVazirmatnWebfonts,
+    copyVazirmatnCss,
     gulp.parallel(watch, webserver)
 );
