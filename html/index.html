@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سازنده منوی سایت - Menu Builder</title>
+    
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Compiled CSS from SCSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="container">
+        
+        <!-- Header Section -->
+        <div class="header">
+            <h1>
+                <i class="fas fa-bars"></i> 
+                سازنده منوی سایت
+            </h1>
+            <p>منوی چند سطحی خود را با کشیدن و رها کردن ایجاد کنید</p>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="content">
+            
+            <!-- Left Panel: Form & Export -->
+            <div class="panel">
+                <h2>
+                    <i class="fas fa-plus-circle"></i> 
+                    افزودن آیتم منو
+                </h2>
+
+                <!-- Instructions -->
+                <div class="instructions">
+                    <strong>راهنما:</strong>
+                    • ابتدا والد منو را انتخاب کنید (یا خالی بگذارید برای منوی سطح اول)<br>
+                    • بعد از ایجاد، می‌توانید با کشیدن آیتم‌ها، ترتیب و سطح آن‌ها را تغییر دهید<br>
+                    • آیتم‌ها را به زیرمجموعه آیتم‌های دیگر بکشید<br>
+                    • <strong>حداکثر عمق مجاز: 3 سطح</strong>
+                </div>
+
+                <!-- Add Menu Form -->
+                <form id="menuForm">
+                    <!-- Parent Select -->
+                    <div class="form-group">
+                        <label for="parentMenu">والد منو</label>
+                        <select id="parentMenu">
+                            <option value="">بدون والد (سطح اول)</option>
+                        </select>
+                    </div>
+
+                    <!-- Title Input -->
+                    <div class="form-group">
+                        <label for="menuTitle">عنوان منو</label>
+                        <input 
+                            type="text" 
+                            id="menuTitle" 
+                            placeholder="مثال: صفحه اصلی" 
+                            required
+                        >
+                    </div>
+
+                    <!-- URL Input -->
+                    <div class="form-group">
+                        <label for="menuUrl">آدرس (URL)</label>
+                        <input 
+                            type="text" 
+                            id="menuUrl" 
+                            placeholder="مثال: /home" 
+                            required
+                        >
+                    </div>
+
+                    <!-- Icon Input (Optional) -->
+                    <div class="form-group">
+                        <label for="menuIcon">آیکون (اختیاری)</label>
+                        <input 
+                            type="text" 
+                            id="menuIcon" 
+                            placeholder="مثال: fas fa-home"
+                        >
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> 
+                        افزودن به منو
+                    </button>
+                </form>
+
+                <!-- Export Section -->
+                <div class="export-section">
+                    <h2>
+                        <i class="fas fa-code"></i> 
+                        خروجی JSON
+                    </h2>
+                    <button class="btn btn-success" onclick="window.menuBuilder.exportMenu()">
+                        <i class="fas fa-download"></i> 
+                        دریافت JSON
+                    </button>
+                    <!-- JSON Output Display -->
+                    <div class="code-output" id="jsonOutput">
+                        منوی خود را ایجاد کنید...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Menu Structure -->
+            <div class="panel">
+                <h2>
+                    <i class="fas fa-list"></i> 
+                    ساختار منو
+                </h2>
+                
+                <!-- Menu List Container (Sortable Root) -->
+                <ul id="menuList" class="menu-list">
+                    <!-- Empty State (shown when no items) -->
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <p>هنوز آیتمی اضافه نشده است</p>
+                    </div>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <!-- Option 1: Using ES Modules -->
+    <script type="module">
+        import { initMenuBuilder } from './menu-builder.js';
+        
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            initMenuBuilder();
+        });
+    </script>
+
+    <!-- Option 2: Using bundled script (if using webpack/vite) -->
+    <!-- <script src="dist/bundle.js"></script> -->
+</body>
+</html>
+
+<!--
+============================================
+HTML Structure Notes:
+============================================
+
+1. RTL Support:
+   - <html dir="rtl"> for right-to-left layout
+   - All text and UI flows from right to left
+
+2. Main Sections:
+   - .header: Title and description
+   - .content: 2-column grid layout
+   - Left panel: Form + JSON export
+   - Right panel: Menu structure display
+
+3. Form Elements:
+   - Parent dropdown (auto-populated from menu data)
+   - Title, URL, Icon inputs
+   - Submit button
+
+4. Menu List (#menuList):
+   - Root container for Sortable.js
+   - Dynamically populated with menu items
+   - Each item has nested-sortable container
+
+5. Menu Item Structure (created in JS):
+   <li class="menu-item" data-id="1" data-level="0">
+     <div class="menu-item-header">
+       <span class="drag-handle">🔘</span>
+       <div class="menu-item-info">
+         <div class="menu-item-title">Title</div>
+         <div class="menu-item-url">URL</div>
+       </div>
+       <button class="btn-delete">🗑️</button>
+     </div>
+     <ul class="nested-sortable">
+       <!-- Nested items here -->
+     </ul>
+   </li>
+
+6. Data Attributes:
+   - data-id: Unique identifier for each item
+   - data-level: Depth level (0, 1, 2, 3...)
+
+7. Integration:
+   - Import menu-builder.js as ES module
+   - Or bundle with webpack/vite/rollup
+   - Make sure Sortable.js is installed via npm
+-->

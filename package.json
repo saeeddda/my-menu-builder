@@ -1,0 +1,28 @@
+{
+  "name": "menu-builder",
+  "version": "1.0.0",
+  "description": "Nested drag-drop menu builder with Sortable.js - RTL Persian support",
+  "main": "menu-builder.js",
+  "type": "module",
+  "scripts": {
+    "css:watch": "sass --watch ./src:./assets",
+    "css:build": "sass ./src:./assets --style compressed"
+  },
+  "keywords": [
+    "menu",
+    "builder",
+    "drag-drop",
+    "nested",
+    "sortable",
+    "rtl",
+    "persian",
+    "farsi"
+  ],
+  "author": "Saeed Noori",
+  "license": "MIT",
+  "dependencies": {
+    "sortablejs": "^1.15.0"
+  },
+  "devDependencies": {
+    "sass": "^1.69.0"  }
+}
