@@ -14,7 +14,7 @@
 // Requires Sortable.js to be loaded before this script
 // ============================================
 
-(function() {
+(function () {
   'use strict';
 
   // ============================================
@@ -25,7 +25,39 @@
   const MAX_DEPTH = 3;
 
   // Global state
-  let menuData = [];
+  let menuData = [
+    {
+      "title": "Home",
+      "url": "home",
+      "icon": "fa fa-home",
+      "children": [
+        {
+          "title": "Home 1",
+          "url": "home-1",
+          "icon": "fas fa-link",
+          "children": []
+        },
+        {
+          "title": "Home 2",
+          "url": "home-2",
+          "icon": "fas fa-link",
+          "children": []
+        }
+      ]
+    },
+    {
+      "title": "Contact",
+      "url": "contact",
+      "icon": "fa fa-address-book",
+      "children": []
+    },
+    {
+      "title": "About",
+      "url": "about",
+      "icon": "fa fa-circle-info",
+      "children": []
+    }
+  ];
   let menuCounter = 0;
   let sortableInstances = [];
 
@@ -115,7 +147,7 @@
 
     function addOptions(items, prefix) {
       prefix = prefix || '';
-      items.forEach(function(item) {
+      items.forEach(function (item) {
         const option = document.createElement('option');
         option.value = item.id;
         option.textContent = prefix + item.title;
@@ -217,11 +249,11 @@
     function traverse(el, depth) {
       const nestedList = el.querySelector(':scope > .nested-sortable');
       if (nestedList && nestedList.children.length > 0) {
-        const children = Array.from(nestedList.children).filter(function(child) {
+        const children = Array.from(nestedList.children).filter(function (child) {
           return child.classList.contains('menu-item');
         });
 
-        children.forEach(function(child) {
+        children.forEach(function (child) {
           maxDepth = Math.max(maxDepth, depth + 1);
           traverse(child, depth + 1);
         });
@@ -241,11 +273,11 @@
     if (!menuList) return;
 
     function updateLevel(element, level) {
-      const items = Array.from(element.children).filter(function(el) {
+      const items = Array.from(element.children).filter(function (el) {
         return el.classList.contains('menu-item');
       });
 
-      items.forEach(function(item) {
+      items.forEach(function (item) {
         item.setAttribute('data-level', level);
 
         const nestedList = item.querySelector(':scope > .nested-sortable');
@@ -270,7 +302,7 @@
     if (!menuList) return;
 
     // Destroy previous Sortable instances
-    sortableInstances.forEach(function(instance) {
+    sortableInstances.forEach(function (instance) {
       if (instance && instance.destroy) {
         instance.destroy();
       }
@@ -291,7 +323,7 @@
     menuList.innerHTML = '';
 
     // Render each top-level item
-    menuData.forEach(function(item) {
+    menuData.forEach(function (item) {
       menuList.appendChild(createMenuItem(item, 0));
     });
 
@@ -308,7 +340,7 @@
    */
   function createMenuItem(item, level) {
     level = level || 0;
-    
+
     const li = document.createElement('li');
     li.className = 'menu-item';
     li.setAttribute('data-id', item.id);
@@ -338,7 +370,7 @@
     childContainer.className = 'nested-sortable';
 
     if (item.children && item.children.length > 0) {
-      item.children.forEach(function(child) {
+      item.children.forEach(function (child) {
         childContainer.appendChild(createMenuItem(child, level + 1));
       });
     } else {
@@ -362,11 +394,11 @@
   function updateMenuDataFromDOM() {
     function parseList(listElement) {
       const items = [];
-      const directChildren = Array.from(listElement.children).filter(function(el) {
+      const directChildren = Array.from(listElement.children).filter(function (el) {
         return el.classList.contains('menu-item');
       });
 
-      directChildren.forEach(function(li) {
+      directChildren.forEach(function (li) {
         const id = parseInt(li.getAttribute('data-id'));
         const originalItem = findItemById(menuData, id);
 
@@ -432,7 +464,7 @@
    */
   function deleteMenuItem(id) {
     function removeById(items) {
-      return items.filter(function(item) {
+      return items.filter(function (item) {
         if (item.id === id) {
           return false;
         }
@@ -462,7 +494,7 @@
 
     // Remove 'id' field from output (internal use only)
     const cleanData = JSON.parse(
-      JSON.stringify(menuData, function(key, value) {
+      JSON.stringify(menuData, function (key, value) {
         if (key === 'id') return undefined;
         return value;
       })
@@ -477,7 +509,7 @@
   function exportMenu() {
     // Remove 'id' field from export
     const cleanData = JSON.parse(
-      JSON.stringify(menuData, function(key, value) {
+      JSON.stringify(menuData, function (key, value) {
         if (key === 'id') return undefined;
         return value;
       })
@@ -506,7 +538,7 @@
    */
   function showNotification(message, type) {
     type = type || 'info';
-    
+
     // Remove existing notification
     const existingNotif = document.querySelector('.notification');
     if (existingNotif) {
@@ -516,10 +548,10 @@
     // Create new notification
     const notification = document.createElement('div');
     notification.className = 'notification notification-' + type;
-    
-    const iconClass = type === 'error' ? 'exclamation-circle' : 
-                     type === 'success' ? 'check-circle' : 'info-circle';
-    
+
+    const iconClass = type === 'error' ? 'exclamation-circle' :
+      type === 'success' ? 'check-circle' : 'info-circle';
+
     notification.innerHTML = '\n' +
       '    <i class="fas fa-' + iconClass + '"></i>\n' +
       '    <span>' + message + '</span>\n' +
@@ -528,9 +560,9 @@
     document.body.appendChild(notification);
 
     // Auto-remove after 3 seconds
-    setTimeout(function() {
+    setTimeout(function () {
       notification.classList.add('fade-out');
-      setTimeout(function() {
+      setTimeout(function () {
         notification.remove();
       }, 300);
     }, 3000);
