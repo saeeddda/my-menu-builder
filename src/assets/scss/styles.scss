@@ -12,13 +12,13 @@
 $primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 $primary-color: #667eea;
 $success-color: #28a745;
-$warning-color: #ffc107;
+$warning-color: #d3840d;
 $danger-color: #dc3545;
 $orange-color: #ff5722;
 $info-color: #17a2b8;
 
 $border-color: #ddd;
-$border-color-dark: #aaa;
+$border-color-dark: #abb2bf;
 $text-primary: #333;
 $text-secondary: #666;
 $text-muted: #999;
@@ -171,52 +171,63 @@ body {
   i {
     font-size: 1em;
   }
-}
 
-.btn-primary {
-  background: $primary-gradient;
-  color: white;
+  &.btn-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: $transition;
+    padding: 0;
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    i {
+      font-size: 14px;
+    }
+  }
+
+  &.btn-primary {
+    background: $primary-gradient;
+    color: white;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+  }
+
+  &.btn-success {
+    background: $success-color;
+    color: white;
+
+    &:hover {
+      background: color.adjust($success-color, $lightness: 10%);
+    }
+  }
+
+  &.btn-delete {
+    background: $danger-color;
+    color: white;
+
+    &:hover {
+      background: color.adjust($danger-color, $lightness: 10%);
+    }
+  }
+
+  &.btn-edit {
+    background: $warning-color;
+    color: white;
+
+    &:hover {
+      background: color.adjust($warning-color, $lightness: 10%);
+    }
   }
 }
 
-.btn-success {
-  background: $success-color;
-  color: white;
 
-  &:hover {
-    background: color.adjust($success-color, $lightness: 10%);
-  }
-}
-
-.btn-icon {
-  width: 35px;
-  height: 35px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: $transition;
-  padding: 0;
-
-  i {
-    font-size: 14px;
-  }
-}
-
-.btn-delete {
-  background: $danger-color;
-  color: white;
-
-  &:hover {
-    background: color.adjust($danger-color, $lightness: 10%);
-  }
-}
 
 // Instructions Box
 // ============================================
@@ -241,119 +252,131 @@ body {
 .menu-list {
   min-height: 200px;
   list-style: none;
-  // padding: 10px;
-  // background: $bg-white;
-  // border-radius: $border-radius;
-}
 
-.menu-item {
-  background: $bg-white;
-  border: 1px solid $border-color;
-  border-radius: $border-radius;
-  padding: 15px;
-  margin-bottom: 10px;
-  transition: $transition;
-  position: relative;
-  list-style: none;
+  .menu-item {
+    background: $bg-white;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    padding: 15px;
+    margin-bottom: 10px;
+    transition: $transition;
+    position: relative;
+    list-style: none;
 
-  &:hover {
-    border-color: $border-color-dark;
-  }
-
-  // Sortable.js states
-  &.sortable-ghost {
-    opacity: 0.4;
-    background: #e3f2fd;
-  }
-
-  &.sortable-chosen {
-    background: #f5f5f5;
-  }
-}
-
-// Menu Item Header (Title, URL, Actions)
-// ============================================
-.menu-item-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: start;
-  gap: 12px;
-}
-
-.menu-item-info {
-  flex: 1;
-  min-width: 0; // Allow text truncation
-  display: flex;
-  gap: 8px;
-  align-items: start;
-
-  .menu-item-icon {
-    i {
-      color: $primary-color;
-      font-size: 16px;
-    }
-  }
-
-  .menu-item-content {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    
-    .menu-item-title {
-      font-weight: 600;
-      color: $text-primary;
-      font-size: 16px;
+    &:hover {
+      border-color: $border-color-dark;
     }
 
-    .menu-item-url {
-      color: $text-secondary;
-      font-size: 13px;
-      word-break: break-all;
+    // Sortable.js states
+    &.sortable-ghost {
+      opacity: 0.4;
+      background: #e3f2fd;
     }
-  }
 
-  .menu-item-actions {
-    display: flex;
-    gap: 10px;
-    flex-shrink: 0;
-  }
-}
+    &.sortable-chosen {
+      background: #f5f5f5;
+    }
 
-// Drag Handle
-// ============================================
-.drag-handle {
-  cursor: grab;
-  color: $text-muted;
-  margin-left: 10px;
-  font-size: 18px;
-  flex-shrink: 0;
-  transition: color 0.2s;
+    &:last-child{
+      margin-bottom: 0;
+    }
 
-  &:hover {
-    color: $primary-color;
-  }
+    // Menu Item Header (Title, URL, Actions)
+    // ============================================
+    .menu-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 12px;
 
-  &:active {
-    cursor: grabbing;
-  }
-}
+      // Drag Handle
+      // ============================================
+      .drag-handle {
+        cursor: grab;
+        color: $text-muted;
+        margin-left: 10px;
+        font-size: 18px;
+        flex-shrink: 0;
+        transition: color 0.2s;
 
-// Nested Sortable Lists
-// ============================================
-.nested-sortable {
-  margin-right: 40px; // Indent for RTL
-  margin-top: 10px;
-  list-style: none;
-  min-height: 50px;
-  background: $bg-light;
-  border-radius: 8px;
-  transition: $transition;
+        &:hover {
+          color: $primary-color;
+        }
 
-  // Empty nested list styling
-  &.empty-nested {
-    min-height: 30px;
-    border: 2px dashed $border-color-dark;
-    background: $bg-light;
+        &:active {
+          cursor: grabbing;
+        }
+      }
+
+      .menu-item-info {
+        flex: 1;
+        min-width: 0; // Allow text truncation
+        display: flex;
+        gap: 8px;
+        align-items: start;
+
+        .menu-item-icon {
+          i {
+            color: $primary-color;
+            font-size: 16px;
+          }
+        }
+
+        .menu-item-content {
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+
+          .menu-item-title {
+            font-weight: 600;
+            color: $text-primary;
+            font-size: 16px;
+          }
+
+          .menu-item-url {
+            color: $text-secondary;
+            font-size: 13px;
+            word-break: break-all;
+          }
+        }
+
+      }
+
+      .menu-item-actions {
+        display: flex;
+        gap: 10px;
+        flex-shrink: 0;
+      }
+    }
+
+    // Nested Sortable Lists
+    // ============================================
+    .nested-sortable {
+      margin-right: 40px; // Indent for RTL
+      margin-top: 10px;
+      list-style: none;
+      min-height: 50px;
+      background: $bg-light;
+      border-radius: 8px;
+      transition: $transition;
+
+      // Empty nested list styling
+      &.empty-nested {
+        min-height: 30px;
+        border: 2px dashed $border-color-dark;
+        background: $bg-light;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &::before{
+          content: 'زیر مجموعه را اینجا رها کنید';
+          font-size: 14px;
+          font-weight: 300;
+          color: $text-light;
+        }
+      }
+    }
   }
 }
 
