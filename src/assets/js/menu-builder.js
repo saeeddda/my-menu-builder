@@ -352,10 +352,13 @@
       '        <i class="fas fa-grip-vertical"></i>\n' +
       '      </span>\n' +
       '      <div class="menu-item-info">\n' +
-      '        <div class="menu-item-title">\n' +
-      '          <i class="' + item.icon + '"></i> ' + item.title + '\n' +
+      '        <div class="menu-item-icon">\n' +
+      '            <i class="' + item.icon + '"></i>\n' +
       '        </div>\n' +
-      '        <div class="menu-item-url">' + item.url + '</div>\n' +
+      '        <div class="menu-item-content">\n' +
+      '            <span class="menu-item-title">' + item.title + '</span>\n' +
+      '            <span class="menu-item-url">' + item.url + '</span>\n' +
+      '        </div>\n' +
       '      </div>\n' +
       '      <div class="menu-item-actions">\n' +
       '        <button class="btn-icon btn-delete" onclick="window.menuBuilder.deleteMenuItem(' + item.id + ')">\n' +
