@@ -27,17 +27,20 @@
   // Global state
   let menuData = [
     {
+      "id": 1,
       "title": "Home",
       "url": "home",
       "icon": "fa fa-home",
       "children": [
         {
+          "id": 2,
           "title": "Home 1",
           "url": "home-1",
           "icon": "fas fa-link",
           "children": []
         },
         {
+          "id": 3,
           "title": "Home 2",
           "url": "home-2",
           "icon": "fas fa-link",
@@ -46,19 +49,21 @@
       ]
     },
     {
+      "id": 4,
       "title": "Contact",
       "url": "contact",
       "icon": "fa fa-address-book",
       "children": []
     },
     {
+      "id": 5,
       "title": "About",
       "url": "about",
       "icon": "fa fa-circle-info",
       "children": []
     }
   ];
-  let menuCounter = 0;
+  let menuCounter = 5;
   let sortableInstances = [];
 
   // ============================================
