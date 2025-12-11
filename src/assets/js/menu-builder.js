@@ -366,7 +366,10 @@
       '        </div>\n' +
       '      </div>\n' +
       '      <div class="menu-item-actions">\n' +
-      '        <button class="btn-icon btn-delete" onclick="window.menuBuilder.deleteMenuItem(' + item.id + ')">\n' +
+      '        <button class="btn btn-icon btn-edit">\n' +
+      '          <i class="fas fa-edit"></i>\n' +
+      '        </button>\n' +
+      '        <button class="btn btn-icon btn-delete" onclick="window.menuBuilder.deleteMenuItem(' + item.id + ')">\n' +
       '          <i class="fas fa-trash"></i>\n' +
       '        </button>\n' +
       '      </div>\n' +
